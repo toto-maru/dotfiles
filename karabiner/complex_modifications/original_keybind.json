@@ -2,7 +2,7 @@
     "title": "original keybindings",
     "rules": [
         {
-            "description": "set 'left_shit - caps_lock' to escape and eisuu for Emacs",
+            "description": "set 'left_shit - caps_lock' to escape and eisuu for Emacs and Vim",
             "manipulators": [
                 {
                     "type": "basic",
@@ -26,7 +26,8 @@
                         {
                             "type": "frontmost_application_if",
                             "bundle_identifiers": [
-                                "^org\\.gnu\\.Emacs$"
+                                "^org\\.gnu\\.Emacs$",
+                                "^com\\.apple\\.Terminal$"
                             ]
                         }
                     ]
@@ -34,7 +35,7 @@
             ]
         },
         {
-            "description": "set 'left_shit - caps_lock' to escape",
+            "description": "set 'left_shit - caps_lock' to escape except for Emacs and Vim",
             "manipulators": [
                 {
                     "type": "basic",
@@ -49,6 +50,15 @@
                     "to": [
                         {
                             "key_code": "escape"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_unless",
+                            "bundle_identifiers": [
+                                "^org\\.gnu\\.Emacs$",
+                                "^com\\.apple\\.Terminal$"
+                            ]
                         }
                     ]
                 }
