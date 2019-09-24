@@ -2,6 +2,38 @@
     "title": "original keybindings",
     "rules": [
         {
+            "description": "set 'left_shit - caps_lock' to escape and eisuu for Emacs",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "caps_lock",
+                        "modifiers": {
+                            "mandatory": [
+                                "left_shift"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "escape"
+                        },
+                        {
+                            "key_code": "japanese_eisuu"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^org\\.gnu\\.Emacs$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "description": "set 'left_shit - caps_lock' to escape",
             "manipulators": [
                 {
