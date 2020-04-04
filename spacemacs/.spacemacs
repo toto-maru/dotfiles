@@ -38,7 +38,8 @@ values."
      java
      ;; scala
      (python :variables
-             python-backend 'lsp)
+             python-backend 'lsp
+             python-pipenv-activate t)
      ipython-notebook
      clojure
      racket
@@ -73,7 +74,10 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages
+   '(
+     jedi
+     )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -335,6 +339,7 @@ you should place your code here."
   (setq ispell-program-name "aspell")
   ;; python dap-mode
   (require 'dap-python)
+  (add-hook 'python-mode-hook 'jedi:setup)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
