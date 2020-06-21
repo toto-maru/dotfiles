@@ -36,8 +36,24 @@ values."
      ruby
      html
      java
+     c-c++
+     (javascript :variables
+                 javascript-fmt-tool 'prettier
+                 javascript-fmt-on-save t
+                 javascript-backend 'lsp
+                 js2-basic-offset 2
+                 js-indent-level 2
+                 javascript-repl `nodejs)
+     (typescript :variables
+                 typescript-fmt-on-save t
+                 typescript-linter 'eslint)
+     (json :variables
+           js-indent-level 2
+           json-fmt-tool 'prettier
+           json-fmt-on-save t)
+     react
      ;; scala
-     (python :variables
+     (python :variable
              python-backend 'lsp
              python-pipenv-activate t)
      ipython-notebook
@@ -339,7 +355,8 @@ you should place your code here."
   (setq ispell-program-name "aspell")
   ;; python dap-mode
   (require 'dap-python)
-  (add-hook 'python-mode-hook 'jedi:setup)
+  (define-key evil-normal-state-map (kbd "C-=") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "C-\-") 'evil-numbers/dec-at-pt)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -370,7 +387,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (lsp-ui lsp-python-ms lsp-java helm-lsp dap-mode lsp-treemacs bui company-lsp yasnippet-snippets reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl yapfify xterm-color web-mode utop tuareg caml tagedit sql-indent slime-company slime slim-mode shell-pop scss-mode scala-mode sbt-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake racket-mode faceup pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements phpunit phpcbf php-extras php-auto-yasnippets org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download ocp-indent noflet multi-term mmm-mode minitest merlin markdown-toc markdown-mode live-py-mode intero hy-mode dash-functional htmlize hlint-refactor hindent helm-pydoc helm-hoogle helm-css-scss helm-company helm-c-yasnippet haskell-snippets haml-mode go-guru go-eldoc gnuplot git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-commit with-editor transient git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck-haskell flycheck-elm flycheck eshell-z eshell-prompt-extras esh-help emmet-mode elm-mode reformatter ein polymode deferred anaphora websocket drupal-mode php-mode diff-hl cython-mode csv-mode company-web web-completion-data company-statistics company-go go-mode company-ghci company-ghc ghc haskell-mode company-emacs-eclim eclim company-cabal company-anaconda company common-lisp-snippets cmm-mode clojure-snippets clj-refactor inflections multiple-cursors paredit cider-eval-sexp-fu cider sesman queue parseedn clojure-mode parseclj a chruby bundler inf-ruby auto-yasnippet yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (tide typescript-mode import-js grizzl add-node-modules-path yasnippet-snippets reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl yapfify xterm-color web-mode utop tuareg caml tagedit sql-indent slime-company slime slim-mode shell-pop scss-mode scala-mode sbt-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake racket-mode faceup pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements phpunit phpcbf php-extras php-auto-yasnippets org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download ocp-indent noflet multi-term mmm-mode minitest merlin markdown-toc markdown-mode live-py-mode intero hy-mode dash-functional htmlize hlint-refactor hindent helm-pydoc helm-hoogle helm-css-scss helm-company helm-c-yasnippet haskell-snippets haml-mode go-guru go-eldoc gnuplot git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-commit with-editor transient git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck-haskell flycheck-elm flycheck eshell-z eshell-prompt-extras esh-help emmet-mode elm-mode reformatter ein polymode deferred anaphora websocket drupal-mode php-mode diff-hl cython-mode csv-mode company-web web-completion-data company-statistics company-go go-mode company-ghci company-ghc ghc haskell-mode company-emacs-eclim eclim company-cabal company-anaconda company common-lisp-snippets cmm-mode clojure-snippets clj-refactor inflections multiple-cursors paredit cider-eval-sexp-fu cider sesman queue parseedn clojure-mode parseclj a chruby bundler inf-ruby auto-yasnippet yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
